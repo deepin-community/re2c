@@ -1,0 +1,2 @@
+version=4
+https://github.com/skvadrik/re2c/releases .*/re2c-(\d\S*)\.(?:tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))

@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-docs
+
+execute_after_dh_installexamples:
+	rm -f debian/re2c/usr/share/doc/re2c/examples/c/__run_all.sh
+	rm -f debian/re2c/usr/share/doc/re2c/examples/go/__run_all.sh
+
+override_dh_auto_test:
+	# testsuite requires Python multiprocessing.Pool()
+	/bin/sh -c 'python3 -c "from multiprocessing import Pool; pool = Pool(); pool.close()" \
+		&& dh_auto_test \
+		|| echo "Support for multiprocessing.Pool() missing, skipping testsuite"'
+
+execute_after_dh_auto_test:
+	# ensure failed tests are visible in the buildlog
+	/bin/sh -c 'cat test-suite.log || true'

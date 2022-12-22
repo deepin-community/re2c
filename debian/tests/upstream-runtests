@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e -u
+
+# run initial build steps to generate the test script
+dh_autoreconf 2>&1
+dh_auto_configure 2>&1
+
+# examples are also used for testing
+cp --verbose --archive run_tests.py examples/ test/ "$AUTOPKGTEST_TMP"
+
+cd "$AUTOPKGTEST_TMP"
+
+# symlink the packaged re2c executable
+ln --verbose --symbolic /usr/bin/re2c "$AUTOPKGTEST_TMP"
+
+# Check for multiprocessing.Pool() support, required by the testsuite
+if $(python3 -c "from multiprocessing import Pool; pool = Pool(); pool.close()" >/dev/null 2>&1); then
+	python3 ./run_tests.py
+else
+	echo "Support for multiprocessing.Pool() missing, skipping testsuite"
+fi

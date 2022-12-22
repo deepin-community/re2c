@@ -1,0 +1,3 @@
+Tests: upstream-runtests
+Depends: @, build-essential, debhelper, dh-autoreconf, python3
+Restrictions: rw-build-tree

@@ -1,0 +1,52 @@
+# fix a spelling error that lintian nags about
+--- a/doc/manual/configurations/configurations.rst_
++++ b/doc/manual/configurations/configurations.rst_
+@@ -88,7 +88,7 @@
+     Defines generic API primitive ``YYLESSTHAN`` (see the user interface section).
+ 
+ ``re2c:yyfill:check``
+-    Setting this to zero allows to suppress the generation of ``YYFILL`` check
++    Setting this to zero allows one to suppress the generation of ``YYFILL`` check
+     (``YYLESSTHAN`` in generic API of ``YYLIMIT``-based comparison in default C
+     API). This configuration is useful when the necessary input is always
+     available. it defaults to ``1`` (the check is generated).
+@@ -241,7 +241,7 @@
+     block, a ``-1`` case is used, and the default case aborts the program.
+ 
+ ``re2c:state:nextlabel``
+-    With storable states, allows to control if the ``YYGETSTATE`` block is
++    With storable states, allows one to control if the ``YYGETSTATE`` block is
+     followed by a ``yyNext`` label (the default value is zero, which corresponds
+     to no label). Instead of using ``yyNext`` it is possible to use
+     ``re2c:startlabel`` to force the generation of a specific start label.
+--- a/doc/manual/eof/eof.rst_
++++ b/doc/manual/eof/eof.rst_
+@@ -26,7 +26,7 @@
+   |
+ 
+ - **Sentinel character with bounds checks.**
+-  This method is generic: it allows to handle any input without restrictions on the regular expressions.
++  This method is generic: it allows one to handle any input without restrictions on the regular expressions.
+   The idea is to reduce the number of end of input checks by performing them only on certain characters.
+   Similar to the "sentinel character" method, one of the characters is chosen as a "sentinel" and appended at the end of input.
+   However, there is no restriction on where the sentinel character may occur (in fact, any character can be chosen for a sentinel).
+@@ -60,7 +60,7 @@
+   |
+ 
+ - **Custom methods with generic API.**
+-  Generic API allows to override basic operations like reading a character,
++  Generic API allows one to override basic operations like reading a character,
+   which makes it possible to include the end of input checks as part of them.
+   Such methods are error-prone and should be used with caution, only if other methods cannot be used.
+   These methods are used if generic API is enabled with ``--input custom`` or ``re2c:flags:input = custom;``
+--- a/doc/manual/options/options.rst_
++++ b/doc/manual/options/options.rst_
+@@ -36,7 +36,7 @@
+ 
+ ``--depfile FILE``
+     Write dependency information to ``FILE`` in the form of a Makefile rule
+-    ``<output-file> : <input-file> [include-file ...]``. This allows to track
++    ``<output-file> : <input-file> [include-file ...]``. This allows one to track
+     build dependencies in the presence of ``/*!include:re2c*/`` directives, so
+     that updating include files triggers regeneration of the output file.
+     This option requires that ``-o --output`` option is specified.

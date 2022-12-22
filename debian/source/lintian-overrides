@@ -1,0 +1,4 @@
+# The PHP license only applies to some data files used in re2c's testsuite.
+# All of those were written as part of PHP itself and thus have rather direct
+# "contributions from the PHP Group", making the lintian hit a false positive.
+re2c source: license-problem-php-license *
