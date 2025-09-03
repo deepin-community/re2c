@@ -1,2 +1,4 @@
 version=4
-https://github.com/skvadrik/re2c/releases .*/re2c-(\d\S*)\.(?:tgz|tbz|txz|(?:tar\.(?:gz|bz2|xz)))
+opts=searchmode=plain \
+ https://api.github.com/repos/skvadrik/re2c/releases?per_page=100 \
+ https://github.com/skvadrik/re2c/releases/download/v?[\d.]+/@PACKAGE@-@ANY_VERSION@@ARCHIVE_EXT@

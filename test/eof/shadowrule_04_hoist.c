@@ -6,24 +6,23 @@
 {
 	YYCTYPE yych;
 	if (YYLIMIT <= YYCURSOR) YYFILL(1);
-	yych = *YYCURSOR;
 	yyt1 = YYCURSOR;
-yy2:
+yy1:
 	++YYCURSOR;
 	if (YYLIMIT <= YYCURSOR) YYFILL(1);
 	yych = *YYCURSOR;
 	switch (yych) {
-	case 'a':	goto yy2;
-	default:	goto yy4;
+		case 'a': goto yy1;
+		default: goto yy2;
 	}
-yy4:
+yy2:
 	x = yyt1;
 	{ /* R1 - here 'x' must be set */ }
 }
 
 
-// EMPTY rule is not shadowed and does match on empty input string. Tags are
-// not hoisted because of the untagged fallback transition to EMPTY.
+// EMPTY rule is shadowed and dead-code-eliminated.
+// Tags are not hoisted because of the untagged transition to EOF.
 
 {
 	YYCTYPE yych;
@@ -31,30 +30,84 @@ yyFillLabel0:
 	yych = *YYCURSOR;
 	if (yych >= 0x01) {
 		yyt1 = YYCURSOR;
-		goto yy7;
+		goto yy4;
 	}
 	if (YYLIMIT <= YYCURSOR) {
 		if (YYFILL() == 0) goto yyFillLabel0;
-		goto yy10;
+		goto yy6;
 	}
 	yyt1 = YYCURSOR;
-yy7:
+yy4:
 	++YYCURSOR;
 yyFillLabel1:
 	yych = *YYCURSOR;
 	switch (yych) {
-	case 'a':	goto yy7;
-	default:
-		if (YYLIMIT <= YYCURSOR) {
-			if (YYFILL() == 0) goto yyFillLabel1;
-		}
-		goto yy9;
+		case 'a': goto yy4;
+		default:
+			if (YYLIMIT <= YYCURSOR) {
+				if (YYFILL() == 0) goto yyFillLabel1;
+			}
+			goto yy5;
 	}
-yy9:
+yy5:
 	x = yyt1;
 	{ /* R1 - here 'x' must be set */ }
-yy10:
+yy6:
 	{ /* EOF - here 'x' must not be set */ }
 }
 
+
+// EMPTY rule is not shadowed and does match on empty input string.
+// Tags are not hoisted because of the untagged transition to EOF.
+
+{
+	YYCTYPE yych;
+	YYMARKER = YYCURSOR;
+yyFillLabel2:
+	yych = *YYCURSOR;
+	if (yych <= 0x00) {
+		if (YYLIMIT <= YYCURSOR) {
+			if (YYFILL() == 0) goto yyFillLabel2;
+			goto yy12;
+		}
+		yyt1 = YYCURSOR;
+		goto yy9;
+	}
+	yyt1 = YYCURSOR;
+	goto yy9;
+yy8:
+	{ /* EMPTY - here 'x' must not be set */ }
+yy9:
+	++YYCURSOR;
+yyFillLabel3:
+	yych = *YYCURSOR;
+	if (yych >= 0x01) goto yy10;
+	if (YYLIMIT <= YYCURSOR) {
+		if (YYFILL() == 0) goto yyFillLabel3;
+		goto yy13;
+	}
+yy10:
+	++YYCURSOR;
+yyFillLabel4:
+	yych = *YYCURSOR;
+	switch (yych) {
+		case 'a': goto yy10;
+		default:
+			if (YYLIMIT <= YYCURSOR) {
+				if (YYFILL() == 0) goto yyFillLabel4;
+			}
+			goto yy11;
+	}
+yy11:
+	x = yyt1;
+	{ /* R1 - here 'x' must be set */ }
+yy12:
+	{ /* EOF - here 'x' must not be set */ }
+yy13:
+	YYCURSOR = YYMARKER;
+	goto yy8;
+}
+
 eof/shadowrule_04_hoist.re:6:12: warning: unreachable rule (shadowed by rule at line 5) [-Wunreachable-rules]
+eof/shadowrule_04_hoist.re:15:12: warning: *** PLEASE FIX ***: in the future $ will become part of a normal rule with position based precedence (https://github.com/skvadrik/re2c/issues/525), so the rule at line 15 will become unreachable (shadowed by the rule at line 14) and this warning will be turned to error [-Wdeprecated-eof-rule]
+eof/shadowrule_04_hoist.re:24:15: warning: *** PLEASE FIX ***: in the future $ will become part of a normal rule with position based precedence (https://github.com/skvadrik/re2c/issues/525), so the rule at line 24 will become unreachable (shadowed by the rule at line 23) and this warning will be turned to error [-Wdeprecated-eof-rule]

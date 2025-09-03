@@ -4,10 +4,8 @@
 {
 	YYCTYPE yych;
 	switch (YYGETCONDITION()) {
-	case yycc1:
-		goto yyc_c1;
-	case yycc2:
-		goto yyc_c2;
+		case yycc1: goto yyc_c1;
+		case yycc2: goto yyc_c2;
 	}
 /* *********************************** */
 yyc_c1:
@@ -23,27 +21,27 @@ yyc_c2:
 	if ((YYLIMIT - YYCURSOR) < 3) YYFILL(3);
 	yych = *YYCURSOR;
 	switch (yych) {
-	case 'd':	goto yy6;
-	default:	goto yy5;
+		case 'd': goto yy4;
+		default: goto yy3;
 	}
-yy5:
+yy3:
 	YYCURSOR = YYMARKER;
-	goto yy7;
-yy6:
+	goto yy5;
+yy4:
 	yych = *(YYMARKER = ++YYCURSOR);
 	switch (yych) {
-	case 'd':	goto yy8;
-	default:	goto yy7;
+		case 'd': goto yy6;
+		default: goto yy5;
 	}
-yy7:
+yy5:
 	{}
-yy8:
+yy6:
 	yych = *++YYCURSOR;
 	switch (yych) {
-	case 'd':	goto yy9;
-	default:	goto yy5;
+		case 'd': goto yy7;
+		default: goto yy3;
 	}
-yy9:
+yy7:
 	++YYCURSOR;
 	{}
 }

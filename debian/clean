@@ -1,3 +1,4 @@
-bootstrap/doc/re2c.1
+bootstrap/doc/*.1
 bootstrap/src/msg/help.cc
 src/msg/help.cc.1
+*/__pycache__/*

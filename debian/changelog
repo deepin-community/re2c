@@ -1,8 +1,81 @@
-re2c (2.2-1deepin0) unstable; urgency=medium
+re2c (4.3-2) unstable; urgency=medium
 
-  * No source change upload against GCC 12.
+  * Upload to unstable.
 
- -- Tianyu Chen <sweetyfish@deepin.org>  Fri, 20 Sep 2024 12:17:45 +0800
+ -- Jeroen Ploemen <jcfp@debian.org>  Sun, 10 Aug 2025 03:51:53 +0000
+
+re2c (4.3-1) experimental; urgency=medium
+
+  * New upstream version 4.3
+  * Tests: make output of cp command non-verbose
+
+ -- Jeroen Ploemen <jcfp@debian.org>  Tue, 05 Aug 2025 09:30:21 +0000
+
+re2c (4.2-1) experimental; urgency=medium
+
+  * New upstream version 4.2
+  * Control: mention newly supported Swift in the long description.
+  * Bump Standards-Version to 4.7.2 (from 4.7.1; no further changes).
+
+ -- Jeroen Ploemen <jcfp@debian.org>  Fri, 09 May 2025 07:49:15 +0000
+
+re2c (4.1-1) unstable; urgency=medium
+
+  * New upstream version 4.1
+  * Bump Standards-Version to 4.7.1 (from 4.7.0; no further changes).
+  * Rules: add --enable-parsers and --enable-syntax configure options.
+
+ -- Jeroen Ploemen <jcfp@debian.org>  Thu, 20 Feb 2025 13:28:03 +0000
+
+re2c (4.0.2-1) unstable; urgency=medium
+
+  * New upstream version 4.0.2
+
+ -- Jeroen Ploemen <jcfp@debian.org>  Tue, 24 Dec 2024 16:06:31 +0000
+
+re2c (4.0.1-1) unstable; urgency=medium
+
+  * New upstream version 4.0.1.
+  * Clean: remove __pycache__ leftovers. (Closes: #1047901)
+  * Bump Standards-Version to 4.7.0 (from 4.6.2; no further changes).
+  * Patches: remove, merged upstream.
+  * Clean: use globbing for cleaning the manpages.
+  * Control: add newly supported languages to the description.
+  * Lintian: also override very-long-line-length-in-source-file for
+    include/unicode_categories.re.
+  * Tests: symlink syntax files and all re2* executables.
+
+ -- Jeroen Ploemen <jcfp@debian.org>  Mon, 25 Nov 2024 15:05:55 +0000
+
+re2c (3.1-1) unstable; urgency=medium
+
+  * New upstream version 3.1
+  * Control: bump Standards-Version to 4.6.2 (from 4.6.1; no further
+    changes).
+  * Patches: expand 02 to fix more typos.
+  * Clean: add manpages for re2{go,rust}.
+  * Control: add build-dep on jdupes.
+  * Rules: call jdupes to deal with some duplicate files in examples.
+
+ -- Jeroen Ploemen <jcfp@debian.org>  Tue, 08 Aug 2023 11:36:36 +0000
+
+re2c (3.0-2) unstable; urgency=medium
+
+  * Watch: switch to github api.
+  * Control: bump std-ver to 4.6.1 (from 4.6.0; no changes).
+
+ -- Jeroen Ploemen <jcfp@debian.org>  Sun, 04 Dec 2022 21:44:51 +0000
+
+re2c (3.0-1) unstable; urgency=medium
+
+  * New upstream version 3.0
+  * Tests: also symlink re2go, re2rust in upstream-runtests.
+  * Patches: refresh 02 (mostly merged upstream).
+  * Rules: also remove __run_all script from rust examples.
+  * Lintian: add override to ignore long lines in test data.
+  * Control: update short description to mention Rust support.
+
+ -- Jeroen Ploemen <jcfp@debian.org>  Thu, 03 Feb 2022 12:01:46 +0000
 
 re2c (2.2-1) unstable; urgency=medium
 

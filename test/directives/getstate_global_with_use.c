@@ -5,16 +5,11 @@
 // global `getstate:re2c` including y, z and unnamed blocks,
 // with start label in the first unnamed block
 switch (YYGETSTATE()) {
-default:
-	goto yy5;
-case 1:
-	goto yyFillLabel1;
-case 2:
-	goto yyFillLabel2;
-case 3:
-	goto yyFillLabel3;
-case 4:
-	goto yyFillLabel4;
+	case 1: goto yyFillLabel1;
+	case 2: goto yyFillLabel2;
+	case 3: goto yyFillLabel3;
+	case 4: goto yyFillLabel4;
+	default: goto yy2;
 }
 
 
@@ -23,75 +18,83 @@ case 4:
 
 // use block (expect a local state switch for this block only)
 
-
 	switch (YYGETSTATE()) {
-	default:
-		goto yy0;
-	case 0:
-		goto yyFillLabel0;
+		case 0: goto yyFillLabel0;
+		default: goto yy0;
 	}
 yy0:
-	YYSETSTATE(0);
-	if (YYLIMIT <= YYCURSOR) YYFILL(1);
+	if (YYLIMIT <= YYCURSOR) {
+		YYSETSTATE(0);
+		YYFILL(1);
+	}
 yyFillLabel0:
-	yych = *YYCURSOR++;
+	++YYCURSOR;
+	YYSETSTATE(-1);
 	{ x }
 
 
 // unnamed global block that includes x (has start label)
 
-
-yy5:
-	YYSETSTATE(1);
-	if (YYLIMIT <= YYCURSOR) YYFILL(1);
+yy2:
+	if (YYLIMIT <= YYCURSOR) {
+		YYSETSTATE(1);
+		YYFILL(1);
+	}
 yyFillLabel1:
-	yych = *YYCURSOR++;
+	++YYCURSOR;
+	YYSETSTATE(-1);
 	{ x }
 
 
 // local block y (no start label)
 
-
-	YYSETSTATE(2);
-	if (YYLIMIT <= YYCURSOR) YYFILL(1);
+	if (YYLIMIT <= YYCURSOR) {
+		YYSETSTATE(2);
+		YYFILL(1);
+	}
 yyFillLabel2:
-	yych = *YYCURSOR++;
+	++YYCURSOR;
+	YYSETSTATE(-1);
 	{ y }
 
 
 // global block z that includes x (no start label)
 
-
-	YYSETSTATE(3);
-	if (YYLIMIT <= YYCURSOR) YYFILL(1);
+	if (YYLIMIT <= YYCURSOR) {
+		YYSETSTATE(3);
+		YYFILL(1);
+	}
 yyFillLabel3:
-	yych = *YYCURSOR++;
+	++YYCURSOR;
+	YYSETSTATE(-1);
 	{ x }
 
 
 // unnamed local block (no start label)
 
-
-	YYSETSTATE(4);
-	if (YYLIMIT <= YYCURSOR) YYFILL(1);
+	if (YYLIMIT <= YYCURSOR) {
+		YYSETSTATE(4);
+		YYFILL(1);
+	}
 yyFillLabel4:
-	yych = *YYCURSOR++;
+	++YYCURSOR;
+	YYSETSTATE(-1);
 	{ ? }
 
 
 // use block (expect a local state switch for this block only)
 
-
 	switch (YYGETSTATE()) {
-	default:
-		goto yy25;
-	case 5:
-		goto yyFillLabel5;
+		case 5: goto yyFillLabel5;
+		default: goto yy10;
 	}
-yy25:
-	YYSETSTATE(5);
-	if (YYLIMIT <= YYCURSOR) YYFILL(1);
+yy10:
+	if (YYLIMIT <= YYCURSOR) {
+		YYSETSTATE(5);
+		YYFILL(1);
+	}
 yyFillLabel5:
-	yych = *YYCURSOR++;
+	++YYCURSOR;
+	YYSETSTATE(-1);
 	{ x }
 

@@ -5,15 +5,18 @@
 
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
+# Ensure the build is reproducible
+export LC_ALL=C.UTF-8
+export LANGUAGE=C.UTF-8
+
 %:
 	dh $@
 
 override_dh_auto_configure:
-	dh_auto_configure -- --enable-docs
+	dh_auto_configure -- --enable-docs --enable-parsers --enable-syntax
 
-execute_after_dh_installexamples:
-	rm -f debian/re2c/usr/share/doc/re2c/examples/c/__run_all.sh
-	rm -f debian/re2c/usr/share/doc/re2c/examples/go/__run_all.sh
+override_dh_installexamples:
+	dh_installexamples --exclude=__run_all.sh
 
 override_dh_auto_test:
 	# testsuite requires Python multiprocessing.Pool()
@@ -24,3 +27,7 @@ override_dh_auto_test:
 execute_after_dh_auto_test:
 	# ensure failed tests are visible in the buildlog
 	/bin/sh -c 'cat test-suite.log || true'
+
+execute_after_dh_link:
+	# Deal with some duplicate files in examples
+	jdupes -rl debian/re2c/usr/share/doc/re2c

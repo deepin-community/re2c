@@ -10,7 +10,7 @@
 enum YYCONDTYPE {
 	yycC1,
 	yycC2,
-	yycC3,
+	yycC3
 };
 #line 6 "directives/cond_format.re"
 
@@ -77,42 +77,40 @@ static const int yycC1; static const int yycC2; static const int yycC3
 	YYCTYPE yych;
 Lstart:
 	switch (YYGETCONDITION()) {
-	case yycC1:
-		goto yyc_C1;
-	case yycC2:
-		goto yyc_C2;
+		case yycC1: goto yyc_C1;
+		case yycC2: goto yyc_C2;
 	}
 /* *********************************** */
 yyc_C1:
 	yych = *YYCURSOR;
 	switch (yych) {
-	case 'a':	goto yy4;
-	default:	goto yy2;
+		case 'a': goto yy2;
+		default: goto yy1;
 	}
-yy2:
+yy1:
 	++YYCURSOR;
 #line 45 "directives/cond_format.re"
 	{ return; }
-#line 97 "directives/cond_format.c"
-yy4:
+#line 95 "directives/cond_format.c"
+yy2:
 	++YYCURSOR;
 	YYSETCONDITION(yycC2);
 #line 43 "directives/cond_format.re"
 	{ goto Lstart; }
-#line 103 "directives/cond_format.c"
+#line 101 "directives/cond_format.c"
 /* *********************************** */
 yyc_C2:
 	yych = *YYCURSOR;
 	switch (yych) {
-	case 'b':	goto yy10;
-	default:	goto yy8;
+		case 'b': goto yy5;
+		default: goto yy4;
 	}
-yy8:
+yy4:
 	++YYCURSOR;
 #line 45 "directives/cond_format.re"
 	{ return; }
-#line 115 "directives/cond_format.c"
-yy10:
+#line 113 "directives/cond_format.c"
+yy5:
 	++YYCURSOR;
 	YYSETCONDITION(yycC1);
 	goto yyc_C1;
@@ -122,46 +120,44 @@ yy10:
 
 // local block 'x' (conditions C1, C3)
 
-#line 126 "directives/cond_format.c"
+#line 124 "directives/cond_format.c"
 {
 	YYCTYPE yych;
 	switch (YYGETCONDITION()) {
-	case yycC1:
-		goto Lx_C1;
-	case yycC3:
-		goto Lx_C3;
+		case yycC1: goto Lx_C1;
+		case yycC3: goto Lx_C3;
 	}
 /* *********************************** */
 Lx_C1:
 	yych = *YYCURSOR;
 	switch (yych) {
-	case 'a':	goto yy16;
-	default:	goto yy14;
+		case 'a': goto yy8;
+		default: goto yy7;
 	}
-yy14:
+yy7:
 	++YYCURSOR;
 #line 53 "directives/cond_format.re"
 	{ return x; }
-#line 146 "directives/cond_format.c"
-yy16:
+#line 142 "directives/cond_format.c"
+yy8:
 	++YYCURSOR;
 	YYSETCONDITION(yycC3);
 #line 51 "directives/cond_format.re"
 	{ goto Lx_C3; }
-#line 152 "directives/cond_format.c"
+#line 148 "directives/cond_format.c"
 /* *********************************** */
 Lx_C3:
 	yych = *YYCURSOR;
 	switch (yych) {
-	case 'b':	goto yy22;
-	default:	goto yy20;
+		case 'b': goto yy11;
+		default: goto yy10;
 	}
-yy20:
+yy10:
 	++YYCURSOR;
 #line 53 "directives/cond_format.re"
 	{ return x; }
-#line 164 "directives/cond_format.c"
-yy22:
+#line 160 "directives/cond_format.c"
+yy11:
 	++YYCURSOR;
 	YYSETCONDITION(yycC1);
 	goto Lx_C1;
