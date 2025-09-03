@@ -2,3 +2,8 @@
 # All of those were written as part of PHP itself and thus have rather direct
 # "contributions from the PHP Group", making the lintian hit a false positive.
 re2c source: license-problem-php-license *
+
+# Ignore long lines in test data
+re2c source: very-long-line-length-in-source-file *test/*
+# Ignore long lines in unicode_categories data
+re2c source: very-long-line-length-in-source-file *include/unicode_categories.re*

@@ -44,22 +44,23 @@ static const int MaxNMatch = 1;
 	if (YYLIMIT <= YYCURSOR) YYFILL(1);
 	yych = *YYCURSOR;
 	switch (yych) {
-	case 'a':	goto yy4;
-	default:	goto yy2;
+		case 'a': goto yy2;
+		default: goto yy1;
 	}
-yy2:
+yy1:
 	++YYCURSOR;
 #line 26 "directives/max_format.re"
 	{ x }
 #line 55 "directives/max_format.c"
-yy4:
+yy2:
 	++YYCURSOR;
 	yynmatch = 1;
-	yypmatch[0] = YYCURSOR - 1;
+	yypmatch[0] = YYCURSOR;
+	yypmatch[0] -= 1;
 	yypmatch[1] = YYCURSOR;
 #line 25 "directives/max_format.re"
 	{ a }
-#line 63 "directives/max_format.c"
+#line 64 "directives/max_format.c"
 }
 #line 27 "directives/max_format.re"
 

@@ -5,10 +5,11 @@ Maintainer: Jeroen Ploemen <jcfp@debian.org>
 Build-Depends:
  bison,
  debhelper-compat (= 13),
+ jdupes,
  python3 <!nocheck>,
  python3-docutils,
  python3-pygments
-Standards-Version: 4.6.0
+Standards-Version: 4.7.2
 Homepage: https://re2c.org
 Vcs-Git: https://salsa.debian.org/jcfp/re2c.git
 Vcs-Browser: https://salsa.debian.org/jcfp/re2c
@@ -18,7 +19,7 @@ Package: re2c
 Architecture: any
 Multi-Arch: foreign
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: lexer generator for C, C++ and Go
+Description: lexer generator for C, C++, Go, Java, Python, Rust, and others
  re2c's main goal is generating fast lexers: at least as fast as
  their reasonably optimized hand-coded counterparts. Instead of using
  a traditional table-driven approach, re2c encodes the generated
@@ -32,3 +33,6 @@ Description: lexer generator for C, C++ and Go
  assuming a fixed program template, re2c lets the programmer write
  most of the interface code and adapt the generated lexer to any
  particular environment.
+ .
+ Supported languages in this release are C, C++, D, Go, Haskell,
+ Java, JS, OCaml, Python, Rust, Swift, V and Zig.
