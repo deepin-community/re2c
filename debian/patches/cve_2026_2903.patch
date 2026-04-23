@@ -1,0 +1,76 @@
+Description: Fix CVE-2026-2903: null pointer dereference when actions are used without rules
+ Null pointer dereference happened because the root TNFA state was null:
+ there were no rules for a block, but determinization still happened.
+ .
+ In this case re2c should emit an error and never even attempt
+ determinization. It was properly handled for blocks with start
+ conditions, but not for normal blocks.
+Author: Ulya Trofimovich <skvadrik@gmail.com>
+Origin: upstream, https://github.com/skvadrik/re2c/commit/febeb977936f9519a25d9fbd10ff8256358cdb97
+Bug: https://security-tracker.debian.org/tracker/CVE-2026-2903
+Bug-Debian: https://bugs.debian.org/1128782
+Forwarded: not-needed
+From febeb977936f9519a25d9fbd10ff8256358cdb97 Mon Sep 17 00:00:00 2001
+From: Ulya Trofimovich <skvadrik@gmail.com>
+Date: Tue, 3 Feb 2026 21:33:11 +0000
+Subject: [PATCH] Fix null pointer dereference when actions are used without
+ rules.
+
+Null pointer dereference happened because the root TNFA state was null:
+there were no rules for a block, but determinization still happened.
+
+In this case re2c should emit an error and never even attempt
+determinization. It was properly handled for blocks with start
+conditions, but not for normal blocks.
+
+This addresses #571 "[Bug] Segmentation Fault (NULL Dereference) in
+re2c::closure_leftmost_dfs during determinization".
+---
+ src/parse/ast.cc                | 19 +++++++++++++++----
+ test/conditions/cond_error_10.c |  2 +-
+ 2 files changed, 16 insertions(+), 5 deletions(-)
+
+Index: github-re2c-CVE-2026-2903/src/parse/ast.cc
+===================================================================
+--- github-re2c-CVE-2026-2903.orig/src/parse/ast.cc
++++ github-re2c-CVE-2026-2903/src/parse/ast.cc
+@@ -334,10 +334,6 @@ Ret check_and_merge_special_rules(AstGra
+                 all_conds_have_it = false; \
+             } else if (g.name == "*") { \
+                 star_action = g.action[0]; \
+-            } else if (g.rules.empty()) { \
+-                RET_FAIL(msg.error(g.action[0]->loc, \
+-                    "%s action for non-existing condition `%s` found", \
+-                    str, g.name.c_str())); \
+             } \
+         } \
+         if (star_action && all_conds_have_it) { \
+@@ -417,6 +413,21 @@ Ret check_and_merge_special_rules(AstGra
+         }
+     }
+ 
++    for (const AstGram& g : grams) {
++        if (g.rules.empty()) {
++#define CHECK_ACTION(action, str) do { \
++            if (!g.action.empty()) { \
++                RET_FAIL(msg.error(g.action[0]->loc, \
++                    "%s action %sbut no rules found", str, incond(g.name).c_str())); \
++            } \
++} while(0)
++            CHECK_ACTION(entry, "entry");
++            CHECK_ACTION(pre_rule, "pre-rule");
++            CHECK_ACTION(post_rule, "post-rule");
++#undef CHECK_ACTION
++        }
++    }
++
+     // zero condition must be the first one.
+     auto zero = std::find_if(
+             grams.begin(), grams.end(), [](const AstGram& g) { return g.name == ZERO_COND; });
+Index: github-re2c-CVE-2026-2903/test/conditions/cond_error_10.c
+===================================================================
+--- github-re2c-CVE-2026-2903.orig/test/conditions/cond_error_10.c
++++ github-re2c-CVE-2026-2903/test/conditions/cond_error_10.c
+@@ -1 +1 @@
+-conditions/cond_error_10.re:7:5: error: pre-rule action for non-existing condition `c` found
++conditions/cond_error_10.re:7:5: error: pre-rule action in condition 'c' but no rules found

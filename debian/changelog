@@ -1,3 +1,10 @@
+re2c (4.3-2deepin1) unstable; urgency=medium
+
+  * Fix CVE-2026-2903: null pointer dereference when actions are used
+    without rules
+
+ -- deepin-ci-robot <packages@deepin.org>  Thu, 23 Apr 2026 11:15:05 +0800
+
 re2c (4.3-2) unstable; urgency=medium
 
   * Upload to unstable.
